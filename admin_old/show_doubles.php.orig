@@ -1,0 +1,53 @@
+<?PHP
+$mysqli = new mysqli("localhost", "root", "", "TileInfoPage");
+<<<<<<< b1aab49130b7a593303687032825237ec09424ac
+if (isset($_GET['pk']) && is_numeric($_GET['pk'])){
+    $query = "SELECT `name`,`link`,`description`,SUM(`name_count`) AS `name_count` ,SUM(`link_count`) AS `link_count` FROM `show_doubbles` WHERE pk=".$_GET['pk'].";";
+}else{
+    $query = "SELECT `name`,`link`,`description`,SUM(`name_count`) AS `name_count` ,SUM(`link_count`) AS `link_count` FROM `show_doubbles` GROUP BY `name` ORDER BY `name`;";
+}
+=======
+
+$query = "SELECT `name`,`link`,`description`,SUM(`name_count`) AS `name_count` ,SUM(`link_count`) AS `link_count` FROM `show_doubbles` GROUP BY `name` ORDER BY `name`;";
+>>>>>>> first release for T#45
+$ResDoubbles = $mysqli->query($query);
+$NumRowsDoubbles = 0;
+$NumRowsDoubbles = $ResDoubbles->num_rows;
+$i=1;
+<<<<<<< b1aab49130b7a593303687032825237ec09424ac
+    echo "<table border=\"1\"><tr><td>Ergebnis</td><td>Eintrag</td></tr>";
+    while ($ThisResDouble = $ResDoubbles->fetch_array(MYSQLI_ASSOC)){
+        $query="SELECT * FROM help_contents WHERE name='".$ThisResDouble['name']."' OR link='".$ThisResDouble['link']."';";
+=======
+// if ($NumRowsDoubbles > 0){
+    echo "<table border=\"1\"><tr><td>Ergebnis</td><td>Eintrag</td></tr>";
+    while ($ThisResDouble = $ResDoubbles->fetch_array(MYSQLI_ASSOC)){
+        //$query="";
+//         if (($ThisResDouble['name_count'] > 0) && ($ThisResDouble['link_count'] = 0)){
+//             $query="SELECT * FROM help_contents WHERE name='".$ThisResDouble['name']."';";
+//         }elseif(($ThisResDouble['name_count'] = 0) && ($ThisResDouble['link_count'] > 0)){
+//             $query="SELECT * FROM help_contents WHERE link='".$ThisResDouble['link']."';";
+//         }elseif(($ThisResDouble['name_count'] > 0) && ($ThisResDouble['link_count'] > 0)){
+            $query="SELECT * FROM help_contents WHERE name='".$ThisResDouble['name']."' OR link='".$ThisResDouble['link']."';";
+//         }
+>>>>>>> first release for T#45
+        $ResThisContentDouble = $mysqli->query($query);
+        $NumRowsThisDoubbles = 0;
+        $NumRowsThisDoubbles = $ResThisContentDouble->num_rows;
+        echo "<tr><td>".(string)$i."</td><td><table border=\"1\">";
+        while ($ThisResDoubleEntry = $ResThisContentDouble->fetch_array(MYSQLI_ASSOC)){
+<<<<<<< b1aab49130b7a593303687032825237ec09424ac
+            echo "<tr><td><a href=\"edit_help.php?pk=".$ThisResDoubleEntry['pk']."\">Ändern</a></td><td>".$ThisResDoubleEntry['name']."</td><td>".$ThisResDoubleEntry['link']."</td><td>".$ThisResDoubleEntry['description']."</td></tr>";
+=======
+            echo "<tr><td>".$ThisResDoubleEntry['name']."</td><td>".$ThisResDoubleEntry['link']."</td><td>".$ThisResDoubleEntry['description']."</td></tr>";
+>>>>>>> first release for T#45
+        }
+        echo "</table></td></tr>";
+        $i++;
+    }
+    echo "</table>";
+<<<<<<< b1aab49130b7a593303687032825237ec09424ac
+=======
+// }
+>>>>>>> first release for T#45
+?>
