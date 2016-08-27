@@ -100,7 +100,7 @@ foreach ($ergarray as $key1 => $value1){
             }
         }
         echo "</select></td><td><input type=\"hidden\" value=\"9999\" name=\"in_".(string)$_GET['pk']."_sequence".(string)$m."\" value=\"".(string)$sequence[$m]."\"></td><tr>\n";
-    }
+        
     echo "<tr><td colspan=\"2\" >&nbsp;&nbsp;&nbsp;<a href=\"delete_faq.php?pk=".$_GET['pk']."\">Kompletten Eintrag löschen</a></td></tr>";
     echo "\t</tr><tr style=\"border:1px solid black;\">\n";
     echo "\t</tr><tr style=\"border:1px solid black;\">\n";
