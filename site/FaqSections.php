@@ -44,7 +44,7 @@ if ($end > 5) $end=5;
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.6">
-    <title>KirchenPavillon Bonn</title>
+    <title><?PHP echo $config_PageName;?></title>
     <link rel="stylesheet" href="assets/css/app.css">
   </head>
   <body>
