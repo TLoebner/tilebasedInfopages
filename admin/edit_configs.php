@@ -58,6 +58,36 @@
         $mysqli->query($query);
         $log->InsertItem("edit_configs.php -- ".$query);
     }
+    if (isset($_POST["configArr_PageTitle"])){
+        $query = "UPDATE configs SET type_text='".$_POST['configArr_PageTitle']."' WHERE name='PageTitle';";
+        $mysqli->query($query);
+        $log->InsertItem("edit_configs.php -- ".$query);
+    }
+    if (isset($_POST["configArr_InfoHeight"])){
+        $query = "UPDATE configs SET type_text='".$_POST['configArr_InfoHeight']."' WHERE name='InfoHeight';";
+        $mysqli->query($query);
+        $log->InsertItem("edit_configs.php -- ".$query);
+    }
+    if (isset($_POST["configArr_InfoWidth"])){
+        $query = "UPDATE configs SET type_text='".$_POST['configArr_InfoWidth']."' WHERE name='InfoWidth';";
+        $mysqli->query($query);
+        $log->InsertItem("edit_configs.php -- ".$query);
+    }
+    if (isset($_POST["configArr_FeedbackHeight"])){
+        $query = "UPDATE configs SET type_text='".$_POST['configArr_FeedbackHeight']."' WHERE name='FeedbackHeight';";
+        $mysqli->query($query);
+        $log->InsertItem("edit_configs.php -- ".$query);
+    }
+    if (isset($_POST["configArr_FeedbackWidth"])){
+        $query = "UPDATE configs SET type_text='".$_POST['configArr_FeedbackWidth']."' WHERE name='FeedbackWidth';";
+        $mysqli->query($query);
+        $log->InsertItem("edit_configs.php -- ".$query);
+    }
+
+
+
+
+
 $log->WriteLog;
 ?>
 <form enctype="multipart/form-data" name="edit_configs" method="POST" action="index.php?action=EditConfigs">
@@ -172,7 +202,7 @@ $log->WriteLog;
     &nbsp;
   </td>
   <td colspan="3">
-    <input name="" type="text" value="<?PHP echo $configArr_PageTitle['content'];?>"/>
+    <input name="configArr_PageTitle" type="text" value="<?PHP echo $configArr_PageTitle['content'];?>"/>
   </td>
 </tr>
 <tr>
@@ -183,7 +213,7 @@ $log->WriteLog;
     &nbsp;
   </td>
   <td colspan="3">
-    <input name="" type="text" value="<?PHP echo $configArr_InfoHeight['content'];?>"/>
+    <input name="configArr_InfoHeight" type="text" value="<?PHP echo $configArr_InfoHeight['content'];?>"/>
   </td>
 </tr>
 <tr>
@@ -194,7 +224,7 @@ $log->WriteLog;
     &nbsp;
   </td>
   <td colspan="3">
-    <input name="" type="text" value="<?PHP echo $configArr_InfoWidth['content'];?>"/>
+    <input name="configArr_InfoWidth" type="text" value="<?PHP echo $configArr_InfoWidth['content'];?>"/>
   </td>
 </tr>
 <tr>
@@ -205,7 +235,7 @@ $log->WriteLog;
     &nbsp;
   </td>
   <td colspan="3">
-    <input name="" type="text" value="<?PHP echo $configArr_FeedbackHeight['content'];?>"/>
+    <input name="configArr_FeedbackHeight" type="text" value="<?PHP echo $configArr_FeedbackHeight['content'];?>"/>
   </td>
 </tr>
 <tr>
@@ -216,7 +246,7 @@ $log->WriteLog;
     &nbsp;
   </td>
   <td colspan="3">
-    <input name="" type="text" value="<?PHP echo $configArr_FeedbackWidth['content'];?>"/>
+    <input name="configArr_FeedbackWidth" type="text" value="<?PHP echo $configArr_FeedbackWidth['content'];?>"/>
   </td>
 </tr>
 </table><br/>
