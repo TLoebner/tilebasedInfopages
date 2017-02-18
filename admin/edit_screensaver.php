@@ -85,7 +85,7 @@ $sqlQuery = "SELECT * FROM screensaver;";
 $resScreensaver = $mysqli->query("SELECT * FROM screensaver;");
 if ($resScreensaver->num_rows > 0){
     while ($line = $resScreensaver->fetch_array(MYSQLI_ASSOC)){
-        echo "<tr><td>".$line['image_name']."</td><td><input type=\"text\" name=\"in_".(string)$line['pk']."_seqno\" value=\"".$line['sequence_no']."\"></td><td><input  type=\"text\" name=\"in_".(string)$line['pk']."_duedate\" value=\"".$line['due_date']."\"></td><td><input type=\"file\" value=\"Datei hochladen\" name=\"in_".(string)$line['pk']."_image\"/></td></tr>";
+        echo "<tr><td>".$line['image_name']."</td><td><input type=\"text\" name=\"in_".(string)$line['pk']."_seqno\" value=\"".$line['sequence_no']."\"></td><td><input  type=\"text\" name=\"in_".(string)$line['pk']."_duedate\" value=\"".$line['due_date']."\"></td><td><img width=\"30px\" src=\"data:".base64_encode($line['type_image_mime']).";base64,".base64_encode($line['image'])."\"><input type=\"file\" value=\"Datei hochladen\" name=\"in_".(string)$line['pk']."_image\"/></td></tr>";
     }
 }
 for($i=1;$i<11;$i++){
