@@ -1,1 +1,4 @@
-./*_dontMerge*
+*_dontMerge*
+*/*_dontMerge*
+*/*/*_dontMerge*
+*/*/*/*_dontMerge*
