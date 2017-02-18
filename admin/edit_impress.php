@@ -24,7 +24,7 @@
      $log->InsertItem("edit_impress.php -- ".$query);
  }
 ?>
- <form enctype="multipart/form-data" name="edit_impress" method="POST" action="index.php?action=EditMainItem&filter=<?PHP echo $image['sequence'];?>">
+ <form enctype="multipart/form-data" name="edit_impress" method="POST" action="index.php?action=EditImpress">
    <table>
     <tr>
       <td>

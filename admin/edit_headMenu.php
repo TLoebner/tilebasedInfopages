@@ -19,13 +19,16 @@
  *  limitations under the License.
  */
 
- <form enctype="multipart/form-data" name="edit_headMenu" method="POST" action="index.php?action=EditMainItem&filter=<?PHP echo $image['sequence'];?>">
+ ?>
+ <form enctype="multipart/form-data" name="edit_headMenu" method="POST" action="index.php?action=EditHeadMenu">
    <table>
+    <tr>
+      <td>
 
-
+      </td>
+    </tr>
    </table>
    <input type="hidden" name="key" value="<?PHP echo $image['key'];?>">
    <input type="hidden" name="sequence" value="<?PHP echo $image['sequence'];?>">
    <input type="submit" value="Ändern">
  </form>
-?>

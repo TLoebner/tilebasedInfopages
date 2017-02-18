@@ -49,7 +49,7 @@
                 <li><a href="index.php?action=EditMain">Titelseite editieren</a></li>
 		            <li><a href="index.php?action=EditConfigs">Konfiguration editieren</a></li>
             		<li><a href="index.php?action=EditImpress">Impressum editieren</a></li>
-            		<li><a href="index.php?action=EditHeadMenu">Oberes Menü editieren</a></li>
+            		<!--<li><a href="index.php?action=EditHeadMenu">Oberes Menü editieren</a></li>-->
             		<li><a href="index.php?action=EditScreensaver">Bildschirmschoner editieren</a></li>
             		<li><a href="index.php?action=UpdateUids">uids erzeugen</a></li>
             		<li><a href="index.php?action=StatusSearch">Statistiken anzeigen</a></li>
