@@ -32,7 +32,7 @@ if(isset($_POST['key']) && isset($_POST['sequence']) && is_numeric($_POST['key']
             $size = $size[3];
             $name = $_FILES['file']['name'];
 
-            $query="UPDATE index_pics set image='".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['file']['tmp_name']))."' , image_size='".(string)$size."' , image_name='".(string)$name."' , image_type='".(string)$type."' WHERE pk=".(string)$_POST['key']." AND sequence_no=".(string)$_POST['sequence'].";";
+            $query="UPDATE index_pics set image='".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['file']['tmp_name']))."' , image_size='".(string)$size."' , image_name='".(string)$name."' , image_type='".(string)$type."' WHERE pk=".(string)$_POST['key'].";";
             $mysqli->query($query);
         }
     }
@@ -40,7 +40,7 @@ if(isset($_POST['key']) && isset($_POST['sequence']) && is_numeric($_POST['key']
     $mysqli->query($query);
     $log->InsertItem("edit_main_item.php -- ".$query);
     $log->WriteLog;
-    header("Location: ./edit_main.php");
+    header("Location: ./index.php?action=EditMain");
 }
 
 
@@ -60,7 +60,7 @@ if (is_numeric($_GET['filter'])){
     }
 }
 ?>
-<form enctype="multipart/form-data" name="edit_main_item" method="POST" action="edit_main_item.php?pk=<?PHP echo $_GET['pk']?>">
+<form enctype="multipart/form-data" name="edit_main_item" method="POST" action="index.php?action=EditMainItem&filter=<?PHP echo $image['sequence'];?>">
 <table>
 <tr>
 <td>Überschrift:</td>
@@ -79,6 +79,7 @@ if (is_numeric($_GET['filter'])){
 <td><input type="text" name="link" value="<?PHP echo $image['link'];?>" size="90"></td>
 </tr>
 </table>
-<input type="hidden" name="key" value="<?PHP echo $image['key'];?>"><input type="hidden" name="sequence" value="<?PHP echo $image['sequence'];?>">
+<input type="hidden" name="key" value="<?PHP echo $image['key'];?>">
+<input type="hidden" name="sequence" value="<?PHP echo $image['sequence'];?>">
 <input type="submit" value="Ändern">
 </form>
