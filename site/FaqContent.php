@@ -66,12 +66,12 @@ $sec_fk=$_GET['id'];
     $query = "SELECT * FROM `configs` WHERE name='feedbackItem';";
     $res = $mysqli->query($query);
     $image = $res->fetch_array(MYSQLI_ASSOC);
-    $feedbackItem = "<img style=\"max-height: <?PHP echo $configArr_FeedbackHeight['content'];?>;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
+    $feedbackItem = "<img style=\"max-height: ".$configArr_FeedbackHeight['content'].";\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
     // $textItem
     $query = "SELECT * FROM `configs` WHERE name='textItem';";
     $res = $mysqli->query($query);
     $image = $res->fetch_array(MYSQLI_ASSOC);
-    $textItem = "<img style=\"max-height: <?PHP echo $configArr_InfoHeight['content'];?>;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
+    $textItem = "<img style=\"max-height: ".$configArr_InfoHeight['content'].";\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
 $start=0;
 $pagination=false;
 $end=count($data);
@@ -121,7 +121,7 @@ $end=count($data);
     $query = "SELECT * FROM `configs` WHERE name='feedbackItem';";
     $res = $mysqli->query($query);
     $image = $res->fetch_array(MYSQLI_ASSOC);
-    $feedbackItem = "<img style=\"max-height: <?PHP echo $configArr_FeedbackHeight['content'];?>;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
+    $feedbackItem = "<img style=\"max-height: ".$configArr_FeedbackHeight['content'].";\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
     ?>
     <div class="row">
       <div class="small-8 medium-8 large-8 columns">

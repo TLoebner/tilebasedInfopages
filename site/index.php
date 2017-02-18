@@ -27,6 +27,7 @@
  *
 **/
 $mysqli = new mysqli("localhost", "root", "", "TileInfoPage");
+require 'config.php';
 $query = "SELECT * FROM index_pics WHERE sequence_no<7;";
 $tile_result = $mysqli->query($query);
 while ($line = $tile_result->fetch_array(MYSQLI_ASSOC)) {
@@ -86,7 +87,7 @@ while ($line = $tile_result->fetch_array(MYSQLI_ASSOC)) {
     $query = "SELECT * FROM `configs` WHERE name='feedbackItem';";
     $res = $mysqli->query($query);
     $image = $res->fetch_array(MYSQLI_ASSOC);
-    $feedbackItem = "<img style=\"max-height: <?PHP echo $configArr_FeedbackHeight['content'];?>;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
+    $feedbackItem = "<img style=\"max-height: ".$configArr_FeedbackHeight['content'].";\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
     ?>
     <div class="row">
       <div class="small-8 medium-8 large-8 columns">
