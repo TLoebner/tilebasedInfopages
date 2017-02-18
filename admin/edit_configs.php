@@ -156,6 +156,69 @@ $log->WriteLog;
 <option <?PHP if ($configArr_FaqContentOrderBy['content'] == "count DESC, content_sequence DESC") echo "selected";?> value="count DESC, content_sequence DESC">meist gesucht absteigend | Reihenfolge absteigend</option>
 </select></td>
 </tr>
+<?PHP
+// BUGFIX #7 from here
+// Page title has to be editable for the app
+// create new menu for configuring all icon sizes flexible (rem) or static (px)
+?>
+<tr>
+  <td colspan="5"><h1>Seitenkonfiguration</h1></td>
+</tr>
+<tr>
+  <td>
+    <?PHP echo $configArr_PageTitle['text'];?>
+  </td>
+  <td>
+    &nbsp;
+  </td>
+  <td colspan="3">
+    <input name="" type="text" value="<?PHP echo $configArr_PageTitle['content'];?>"/>
+  </td>
+</tr>
+<tr>
+  <td>
+    <?PHP echo $configArr_InfoHeight['text'];?>
+  </td>
+  <td>
+    &nbsp;
+  </td>
+  <td colspan="3">
+    <input name="" type="text" value="<?PHP echo $configArr_InfoHeight['content'];?>"/>
+  </td>
+</tr>
+<tr>
+  <td>
+    <?PHP echo $configArr_InfoWidth['text'];?>
+  </td>
+  <td>
+    &nbsp;
+  </td>
+  <td colspan="3">
+    <input name="" type="text" value="<?PHP echo $configArr_InfoWidth['content'];?>"/>
+  </td>
+</tr>
+<tr>
+  <td>
+    <?PHP echo $configArr_FeedbackHeight['text'];?>
+  </td>
+  <td>
+    &nbsp;
+  </td>
+  <td colspan="3">
+    <input name="" type="text" value="<?PHP echo $configArr_FeedbackHeight['content'];?>"/>
+  </td>
+</tr>
+<tr>
+  <td>
+    <?PHP echo $configArr_FeedbackWidth['text'];?>
+  </td>
+  <td>
+    &nbsp;
+  </td>
+  <td colspan="3">
+    <input name="" type="text" value="<?PHP echo $configArr_FeedbackWidth['content'];?>"/>
+  </td>
+</tr>
 </table><br/>
 <!--<h1><u>Impressum</u></h1><br>
 <textarea name="config_impressum_text" cols=160 rows=50><?PHP echo $config_impressum;?></textarea><br/>-->

@@ -72,7 +72,7 @@ $Impressum=$config_impressum;
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?PHP echo $config_PageName;?></title>
+    <title><?PHP echo $configArr_PageTitle['content'];?></title>
     <link rel="stylesheet" href="assets/css/app.css">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" charset="UTF-8"></script>
     <link rel="stylesheet" href="minified/themes/default.min.css" type="text/css" media="all" charset="UTF-8" />

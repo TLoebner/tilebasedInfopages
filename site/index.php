@@ -52,7 +52,7 @@ while ($line = $tile_result->fetch_array(MYSQLI_ASSOC)) {
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?PHP echo $config_PageName;?></title>
+    <title><?PHP echo $configArr_PageTitle['content'];?></title>
     <link rel="stylesheet" href="assets/css/app.css">
   </head>
   <body>
@@ -86,7 +86,7 @@ while ($line = $tile_result->fetch_array(MYSQLI_ASSOC)) {
     $query = "SELECT * FROM `configs` WHERE name='feedbackItem';";
     $res = $mysqli->query($query);
     $image = $res->fetch_array(MYSQLI_ASSOC);
-    $feedbackItem = "<img style=\"max-height: 10px;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
+    $feedbackItem = "<img style=\"max-height: <?PHP echo $configArr_FeedbackHeight['content'];?>;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
     ?>
     <div class="row">
       <div class="small-8 medium-8 large-8 columns">

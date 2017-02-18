@@ -44,7 +44,7 @@ $sec_fk=$_GET['id'];
                 $i++;
             }
         }
-        
+
     }else{
         $query = "SELECT * FROM `all_faq_contents` WHERE section_pk=".$sec_fk." ORDER BY ".$config_FaqContentOrderBy.";";
         $res_sub_sec_help = $mysqli->query($query);
@@ -66,12 +66,12 @@ $sec_fk=$_GET['id'];
     $query = "SELECT * FROM `configs` WHERE name='feedbackItem';";
     $res = $mysqli->query($query);
     $image = $res->fetch_array(MYSQLI_ASSOC);
-    $feedbackItem = "<img style=\"max-height: 10px;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
+    $feedbackItem = "<img style=\"max-height: <?PHP echo $configArr_FeedbackHeight['content'];?>;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
     // $textItem
     $query = "SELECT * FROM `configs` WHERE name='textItem';";
     $res = $mysqli->query($query);
     $image = $res->fetch_array(MYSQLI_ASSOC);
-    $textItem = "<img style=\"max-height: 10px;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
+    $textItem = "<img style=\"max-height: <?PHP echo $configArr_InfoHeight['content'];?>;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
 $start=0;
 $pagination=false;
 $end=count($data);
@@ -83,7 +83,7 @@ $end=count($data);
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?PHP echo $config_PageName;?></title>
+    <title><?PHP echo $configArr_PageTitle['content'];?></title>
     <link rel="stylesheet" href="assets/css/app.css">
   </head>
   <body>
@@ -115,13 +115,13 @@ $end=count($data);
       <div class="small-2 medium-2 large-2 columns">
         <p>&nbsp;</p>
       </div>
-    </div> 
-    
+    </div>
+
     <?PHP
     $query = "SELECT * FROM `configs` WHERE name='feedbackItem';";
     $res = $mysqli->query($query);
     $image = $res->fetch_array(MYSQLI_ASSOC);
-    $feedbackItem = "<img style=\"max-height: 10px;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
+    $feedbackItem = "<img style=\"max-height: <?PHP echo $configArr_FeedbackHeight['content'];?>;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
     ?>
     <div class="row">
       <div class="small-8 medium-8 large-8 columns">
@@ -144,7 +144,7 @@ $end=count($data);
             <h1> <?PHP echo $section['name'];?> </h1>
         </div>
     </div>
-    
+
         <?PHP if ($pagintion){?>
      <div class="row">
       <div class="small-12 medium-12 large-12 columns">
@@ -181,7 +181,7 @@ $end=count($data);
         ?>
         </div>
     </div>
-    
+
         <?PHP if ($pagintion){?>
      <div class="row">
       <div class="small-12 medium-12 large-12 columns">
@@ -200,7 +200,7 @@ $end=count($data);
         </div>
       </div>
     <?PHP } ?>
-    
+
     <?PHP
             for ($i=$start;$i<=$end;$i++){
         ?>
@@ -249,7 +249,7 @@ $end=count($data);
                     <a href="../admin/">Administration</a>
                 </div>
         </div>
-    
+
     <script src="assets/js/app.js"></script>
   </body>
 </html>

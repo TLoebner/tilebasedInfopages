@@ -28,9 +28,9 @@ $subsec_fk=$_GET['id'];
     $query = "SELECT * FROM `help_sections` WHERE pk=".$sec_fk;
         $res_sub_sec_help = $mysqli->query($query);
     $section = $res_sub_sec_help->fetch_array(MYSQLI_ASSOC);
-    
-    
-    
+
+
+
     if(isset($_GET['uid']) && !empty($_GET['uid'])){
         $uid=$_GET['uid'];
         $query = "SELECT * FROM `all_search_contents` WHERE type='help' AND section_pk=".$sec_fk." AND subsection_pk=".$subsec_fk." AND uid='".(string)$uid."' ORDER BY ".$config_HelpContentOrderBy.";";
@@ -44,7 +44,7 @@ $subsec_fk=$_GET['id'];
                 $i++;
             }
         }
-        
+
     }else{
         $query = "SELECT * FROM `all_help_contents` WHERE section_pk=".$sec_fk." AND subsection_pk=".$subsec_fk." ORDER BY ".$config_HelpContentOrderBy.";";
         $res_sub_sec_help = $mysqli->query($query);
@@ -66,12 +66,12 @@ $subsec_fk=$_GET['id'];
     $query = "SELECT * FROM `configs` WHERE name='feedbackItem';";
     $res = $mysqli->query($query);
     $image = $res->fetch_array(MYSQLI_ASSOC);
-    $feedbackItem = "<img style=\"max-height: 10px;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
+    $feedbackItem = "<img style=\"max-height: <?PHP echo $configArr_FeedbackHeight['content'];?>;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
     // $textItem
     $query = "SELECT * FROM `configs` WHERE name='textItem';";
     $res = $mysqli->query($query);
     $image = $res->fetch_array(MYSQLI_ASSOC);
-    $textItem = "<img style=\"max-height: 10px;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
+    $textItem = "<img style=\"max-height: <?PHP echo $configArr_InfoHeight['content'];?>;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
 $start=0;
 if (isset($_GET['start']))$start=$_GET['start'];
 if ($start<0) $start=0;
@@ -86,7 +86,7 @@ if ($end < count($data)) $pagination=true;
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?PHP echo $config_PageName;?></title>
+    <title><?PHP echo $configArr_PageTitle['content'];?></title>
     <link rel="stylesheet" href="assets/css/app.css">
   </head>
   <body>
@@ -119,7 +119,7 @@ if ($end < count($data)) $pagination=true;
     $query = "SELECT * FROM `configs` WHERE name='feedbackItem';";
     $res = $mysqli->query($query);
     $image = $res->fetch_array(MYSQLI_ASSOC);
-    $feedbackItem = "<img style=\"max-height: 10px;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
+    $feedbackItem = "<img style=\"max-height: <?PHP echo $configArr_FeedbackHeight['content'];?>;\" src=\"data:".base64_encode($image['type_image_mime']).";base64,".base64_encode($image['type_image_data'])."\" />";
     ?>
     <div class="row">
       <div class="small-8 medium-8 large-8 columns">
@@ -135,7 +135,7 @@ if ($end < count($data)) $pagination=true;
         <p>&nbsp;</p>
       </div>
     </div>
-    
+
      <div class="row">
       <div class="small-12 medium-12 large-12 columns">
         <div class="pagination-centered"  align="center">
@@ -153,10 +153,10 @@ if ($end < count($data)) $pagination=true;
         </div>
       </div>
     <div class="row">
-        <?PHP 
+        <?PHP
             $j=1;
             for ($i=$start;$i<=$end;$i++){
-            
+
                 if (strlen($data[$i]['description']) > 200)
                 {
                     $description = substr($data[$i]['description'], 0, 190) . ' ...';
@@ -164,8 +164,8 @@ if ($end < count($data)) $pagination=true;
                 {
                     $description = $data[$i]['description'];
                 }
-            
-            
+
+
         ?>
         <div class="small-3 medium-4 large-4 columns">
             <div class="panel" >
@@ -211,12 +211,12 @@ if ($end < count($data)) $pagination=true;
         </ul>
         </div>
       </div>
-    
-    
-        <?PHP 
+
+
+        <?PHP
             for ($i=$start;$i<=$end;$i++){
         ?>
-        
+
     <div class="reveal" id="FeedbackInsert<?PHP echo $i;?>" data-reveal>
         <div class="panel">
         <form name="Feedback" method="POST" action="HelpFeedback.php">
@@ -232,8 +232,8 @@ if ($end < count($data)) $pagination=true;
       </form>
       </div>
     </div>
-    
-    
+
+
     <div class="reveal" id="Text<?PHP echo $i;?>" data-reveal>
             <div class="panel" style="-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.41);-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.41);box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.41);">
                 <table width="130px" >
@@ -251,7 +251,7 @@ if ($end < count($data)) $pagination=true;
                 </table>
             </div>
     </div>
-    
+
         <?PHP
         }
         ?>

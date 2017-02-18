@@ -35,7 +35,7 @@ $searchString="Suchbegriff";
     $tile_result = $mysqli->query($query);
 
     $images[0] = $tile_result->fetch_array(MYSQLI_ASSOC);
-    
+
     // search
     if(isset($_GET['search']) && !empty($_GET['search'])){
         $search = $_GET['search'];
@@ -45,71 +45,71 @@ $searchString="Suchbegriff";
         $search = str_replace("*","",$search);
         $search = mysqli_real_escape_string($mysqli,$search);
         $search = str_replace(" ","%",$search);
-        
+
 
         $SearchQuery1 = "SELECT * FROM all_help_contents WHERE help_name LIKE '%".$search."%' OR link LIKE '%".$search."%' OR description LIKE '%".$search."%' OR meta_description LIKE '%".$search."%' OR section_name LIKE '%".$search."%' OR subsection_name LIKE '%".$search."%'";
-        
+
         $SearchQuery2 = "SELECT * FROM all_faq_contents WHERE section_name LIKE '%".$search."%' OR  question LIKE '%".$search."%' OR  answer LIKE '%".$search."%' OR  link LIKE '%".$search."%'";
-        
+
         $OldSearchQuery = "SELECT * FROM searches WHERE string='".strtolower($search)."';";
-        
+
         $HelpSearchRes = $mysqli->query($SearchQuery1);
         $FaqSearchRes = $mysqli->query($SearchQuery2);
         $OldSearchRes = $mysqli->query($OldSearchQuery);
-        
+
         $data=array();
         $data['help']=array();
         $data['faq']=array();
         $timestamp = date('Y-m-d G:i:s');
-        
+
         if ($OldSearchRes->num_rows>0){
             $ThisSearch = $OldSearchRes->fetch_array(MYSQLI_ASSOC);
             $uid = $ThisSearch['uid'];
             $search_pk=$ThisSearch['pk'];
-            
+
             // reset old search search_results
             $ResetQuery="DELETE FROM `search_results` WHERE searches_fk=".$search_pk.";";
             $mysqli->query($ResetQuery);
-            
+
             if ($HelpSearchRes->num_rows > 0){
                 while ($line = $HelpSearchRes->fetch_array(MYSQLI_ASSOC)) {
                     $query = "INSERT INTO search_results (searches_fk,help_subsection_fk,help_content_fk) VALUES('".$search_pk."','".$line['subsection_pk']."','".$line['content_pk']."');";
                     $mysqli->query($query);
                 }
             }
-            
+
             if ($FaqSearchRes->num_rows > 0){
                 while ($line = $FaqSearchRes->fetch_array(MYSQLI_ASSOC)) {
                     $query = "INSERT INTO search_results (searches_fk,faq_section_fk,faq_content_fk) VALUES('".$search_pk."','".$line['section_pk']."','".$line['content_pk']."');";
                     $mysqli->query($query);
                 }
             }
-            
+
             $query="UPDATE searches SET creation='".$timestamp."' WHERE pk=".$search_pk.";";
             $mysqli->query($query);
-            
+
         }else{
-            
+
             $uid = uniqid('',true);
-            
-            // check string here !!! 
-            
+
+            // check string here !!!
+
             $query="INSERT INTO searches (uid,string,creation) VALUES ('".$uid."','".strtolower(mysqli_real_escape_string($mysqli,$search))."','".$timestamp."');";
             $mysqli->query($query);
-            
+
             $query="SELECT * FROM searches WHERE uid='".$uid."';";
             $res=$mysqli->query($query);
             $line = $res->fetch_array(MYSQLI_ASSOC);
-            
+
             $search_pk=$line['pk'];
-            
+
             if ($HelpSearchRes->num_rows > 0){
                 while ($line = $HelpSearchRes->fetch_array(MYSQLI_ASSOC)) {
                     $query = "INSERT INTO search_results (searches_fk,help_subsection_fk,help_content_fk) VALUES('".$search_pk."','".$line['subsection_pk']."','".$line['content_pk']."');";
                     $mysqli->query($query);
                 }
             }
-            
+
             if ($FaqSearchRes->num_rows > 0){
                 while ($line = $FaqSearchRes->fetch_array(MYSQLI_ASSOC)) {
                     $query = "INSERT INTO search_results (searches_fk,faq_section_fk,faq_content_fk) VALUES('".$search_pk."','".$line['section_pk']."','".$line['content_pk']."');";
@@ -118,7 +118,7 @@ $searchString="Suchbegriff";
             }
         }
     }
-    
+
     // STATUS
     $statusQuery="SELECT * FROM `status_search` WHERE month=".date('n')." AND year=".date('Y')." AND searches_fk=".$search_pk.";";
     $statusRes = $mysqli->query($statusQuery);
@@ -131,7 +131,7 @@ $searchString="Suchbegriff";
         $statusQuery="INSERT INTO `status_search` (month,year,searches_fk, count) VALUES(".date('n').",".date('Y').",'".$search_pk."',1);";
     }
     $mysqli->query($statusQuery);
-    
+
      $query = "SELECT section_pk,type,name,bg,fg,image,string FROM `search_sections` WHERE uid='".$uid."'";
      $searchRes = $mysqli->query($query);
      if ($searchRes->num_rows > 0){
@@ -150,7 +150,7 @@ $searchString="Suchbegriff";
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.6">
-    <title><?PHP echo $config_PageName;?></title>
+    <title><?PHP echo $configArr_PageTitle['content'];?></title>
     <link rel="stylesheet" href="assets/css/app.css">
   </head>
   <body>
@@ -259,7 +259,7 @@ $searchString="Suchbegriff";
         //}
         //}
     }
-    
+
     foreach ($SearchArray['faq'] as $key1 => $value1){
         //foreach ($value1 as $key2 => $value2){
             // FAQ TILE
