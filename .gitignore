@@ -2,3 +2,7 @@
 */*_dontMerge*
 */*/*_dontMerge*
 */*/*/*_dontMerge*
+log/
+log/*.*
+admin/log/
+admin/log/*.*

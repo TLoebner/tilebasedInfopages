@@ -18,8 +18,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 foreach ($_POST as $key => $value){
-//     echo $key." : ".$value."<br/>\n";
      $postvarsplit = preg_split('/_/',$key);
     if ($postvarsplit[0] == 'in'){
         $EditErgarray[$postvarsplit[1]][$postvarsplit[2]] = $value;
@@ -39,13 +39,13 @@ foreach($EditErgarray as $key1 => $value1){
                 $size = $size[3];
                 $name = $_FILES['in_'.$key1.'_image']['name'];
 
-                $query="UPDATE INTO screensaver (sequence_no,due_date,image_type,image,image_size,image_name) image='".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['in_'.$key1.'_image']['tmp_name']))."' WHERE pk=".(string)$key1.";";
+                $query="UPDATE screensaver SET sequence_no=".$value1['seqno']." ,due_date=".$value1['duedate']." ,image='".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['in_'.$key1.'_image']['tmp_name']))."' WHERE pk=".(string)$key1.";";
                 $mysqli->query($query);
                 $log->InsertItem("edit_screensaver.php -- ".$query);
                 $log->WriteLog;
             }
     }else{
-
+      $query="UPDATE screensaver SET sequence_no=".$value1['seqno']." ,due_date=".$value1['duedate']."  WHERE pk=".(string)$key1.";";
     }
 }
 foreach($NewErgarray as $key1 => $value1){
@@ -59,18 +59,16 @@ foreach($NewErgarray as $key1 => $value1){
                 $size = $size[3];
                 $name = $_FILES['in_'.$key1.'_image']['name'];
 
-                $query="INSERT INTO screensaver (sequence_no,due_date,image_type,image,image_size,image_name) image='".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['in_'.$key1.'_image']['tmp_name']))."' WHERE pk=".(string)$key1.";";
+                $query="INSERT INTO screensaver (sequence_no,due_date,image_type,image,image_size,image_name,image) VALUES (".$value1['seqno'].",".$value1['duedate'].",'".$type."','".$size."','".$name."','".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['in_'.$key1.'_image']['tmp_name']))."') WHERE pk=".(string)$key1.";";
                 $mysqli->query($query);
                 $log->InsertItem("edit_screensaver.php -- ".$query);
                 $log->WriteLog;
             }
-    }else{
-
     }
 }
 
 ?>
-<form name="edit_screensaver" enctype="multipart/form-data" method="POST" action="edit_screensaver.php?pk=<?PHP echo $_GET['pk']?>">
+<form name="edit_screensaver" enctype="multipart/form-data" method="POST" action="index.php?action=EditScreensaver">
 <table>
 <tr>
     <td>Name</td>
