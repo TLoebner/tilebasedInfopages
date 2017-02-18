@@ -39,34 +39,46 @@ foreach($EditErgarray as $key1 => $value1){
                 $size = $size[3];
                 $name = $_FILES['in_'.$key1.'_image']['name'];
 
-                $query="UPDATE screensaver SET sequence_no=".$value1['seqno']." ,due_date=".$value1['duedate']." ,image='".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['in_'.$key1.'_image']['tmp_name']))."' WHERE pk=".(string)$key1.";";
+                $query="UPDATE screensaver SET sequence_no=".$value1['seqno']." ,due_date='".$value1['duedate']."' ,image='".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['in_'.$key1.'_image']['tmp_name']))."' WHERE pk=".(string)$key1.";";
                 $mysqli->query($query);
                 $log->InsertItem("edit_screensaver.php -- ".$query);
                 $log->WriteLog;
+            }else{
+              $query="UPDATE screensaver SET sequence_no=".$value1['seqno']." ,due_date='".$value1['duedate']."'  WHERE pk=".(string)$key1.";";
+              $mysqli->query($query);
+              $log->InsertItem("edit_screensaver.php -- ".$query);
+              $log->WriteLog;
             }
     }else{
-      $query="UPDATE screensaver SET sequence_no=".$value1['seqno']." ,due_date=".$value1['duedate']."  WHERE pk=".(string)$key1.";";
+      $query="UPDATE screensaver SET sequence_no=".$value1['seqno']." ,due_date='".$value1['duedate']."'  WHERE pk=".(string)$key1.";";
+      $mysqli->query($query);
+      $log->InsertItem("edit_screensaver.php -- ".$query);
+      $log->WriteLog;
     }
 }
 foreach($NewErgarray as $key1 => $value1){
-    if(isset($_FILES['in_'.$key1.'_image'])){
-            if(is_uploaded_file($_FILES['in_'.$key1.'_image']['tmp_name']) && getimagesize($_FILES['in_'.$key1.'_image']['tmp_name']) != false){
-                /***  get the image info. ***/
-                $size = getimagesize($_FILES['in_'.$key1.'_image']['tmp_name']);
-                /*** assign our variables ***/
-                $type = $size['mime'];
-                $imgfp = fopen($_FILES['in_'.$key1.'_image']['tmp_name'], 'rb');
-                $size = $size[3];
-                $name = $_FILES['in_'.$key1.'_image']['name'];
+    if(isset($_FILES['new_'.$key1.'_image'])){
+      if(is_uploaded_file($_FILES['new_'.$key1.'_image']['tmp_name']) && getimagesize($_FILES['new_'.$key1.'_image']['tmp_name']) != false){
+          /***  get the image info. ***/
+          $size = getimagesize($_FILES['new_'.$key1.'_image']['tmp_name']);
+          /*** assign our variables ***/
+          $type = $size['mime'];
+          $imgfp = fopen($_FILES['new_'.$key1.'_image']['tmp_name'], 'rb');
+          $size = $size[3];
+          $name = $_FILES['new_'.$key1.'_image']['name'];
 
-                $query="INSERT INTO screensaver (sequence_no,due_date,image_type,image,image_size,image_name,image) VALUES (".$value1['seqno'].",".$value1['duedate'].",'".$type."','".$size."','".$name."','".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['in_'.$key1.'_image']['tmp_name']))."') WHERE pk=".(string)$key1.";";
-                $mysqli->query($query);
-                $log->InsertItem("edit_screensaver.php -- ".$query);
-                $log->WriteLog;
-            }
+          $query="INSERT INTO screensaver (sequence_no,due_date,image_type,image_size,image_name,image) VALUES (".$value1['seqno'].",'".$value1['duedate']."','".$type."','".$size."','".$name."','".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['new_'.$key1.'_image']['tmp_name']))."');";
+          $mysqli->query($query);
+          $log->InsertItem("edit_screensaver.php -- ".$query);
+          $log->WriteLog;
+      }else{
+          $query="INSERT INTO screensaver (sequence_no,due_date) VALUES (".$value1['seqno'].",'".$value1['duedate']."');";
+          $mysqli->query($query);
+          $log->InsertItem("edit_screensaver.php -- ".$query);
+          $log->WriteLog;
+      }
     }
 }
-
 ?>
 <form name="edit_screensaver" enctype="multipart/form-data" method="POST" action="index.php?action=EditScreensaver">
 <table>
