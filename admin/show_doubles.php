@@ -35,7 +35,7 @@ $i=1;
         $NumRowsThisDoubbles = $ResThisContentDouble->num_rows;
         echo "<tr><td>".(string)$i."</td><td><table border=\"1\">";
         while ($ThisResDoubleEntry = $ResThisContentDouble->fetch_array(MYSQLI_ASSOC)){
-            echo "<tr><td><a href=\"edit_help.php?pk=".$ThisResDoubleEntry['pk']."\">Ändern</a></td><td>".$ThisResDoubleEntry['name']."</td><td>".$ThisResDoubleEntry['link']."</td><td>".$ThisResDoubleEntry['description']."</td></tr>";
+            echo "<tr><td><a href=\"index.php?action=EditHelp&pk=".$ThisResDoubleEntry['pk']."\">Ändern</a></td><td>".$ThisResDoubleEntry['name']."</td><td>".$ThisResDoubleEntry['link']."</td><td>".$ThisResDoubleEntry['description']."</td></tr>";
         }
         echo "</table></td></tr>";
         $i++;
