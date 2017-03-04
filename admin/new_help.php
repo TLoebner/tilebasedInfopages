@@ -19,7 +19,6 @@
  *  limitations under the License.
  */
 foreach ($_POST as $key => $value){
-  //echo $key." : ".$value."<br/>\n";
   $postvarsplit = preg_split('/_/',$key);
   if ($postvarsplit[0] == 'new'){
     $ergarray[$postvarsplit[1]][$postvarsplit[2]] = $value;
