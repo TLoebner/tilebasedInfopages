@@ -26,13 +26,14 @@ foreach ($_POST as $key => $value){
     }
 }
 foreach ($ergarray as $key1 => $value1){
-//     echo $key1." : ".$value1."<br/>\n";
+  if((isset($value1['name'])) && ($value1['name'] !="")){
     if (is_numeric($key1)){
-        $query = "INSERT INTO help_subsections (help_section_fk,name,sequence_no) VALUES(".$value1['contents'].",'".$value1['name']."',9999)";
-        $mysqli->query($query);
-        $log->InsertItem("NEW_new_help_subcath.php -- ".$query);
-        $log->WriteLog;
+      $query = "INSERT INTO help_subsections (help_section_fk,name,sequence_no) VALUES(".$value1['contents'].",'".$value1['name']."',9999)";
+      $mysqli->query($query);
+      $log->InsertItem("NEW_new_help_subcath.php -- ".$query);
+      $log->WriteLog;
     }
+  }
 }
 ?>
 <form name="new_help_subcath" method="POST" action="index.php?action=NewHelpSubCath">

@@ -26,21 +26,23 @@ foreach ($_POST as $key => $value){
     }
 }
 foreach ($ergarray as $key1 => $value1){
+  if((isset($value1['name'])) && ($value1['name'] !="")){
     if (is_numeric($key1)){
-        if(isset($_FILES['new_'.$key1.'_image'])){
-                if(is_uploaded_file($_FILES['new_'.$key1.'_image']['tmp_name']) && getimagesize($_FILES['new_'.$key1.'_image']['tmp_name']) != false){
-                    $size = getimagesize($_FILES['new_'.$key1.'_image']['tmp_name']);
-                    $type = $size['mime'];
-                    $imgfp = fopen($_FILES['new_'.$key1.'_image']['tmp_name'], 'rb');
-                    $size = $size[3];
-                    $name = $_FILES['new_'.$key1.'_image']['name'];
-                }
-            }
-        $query = "INSERT INTO help_sections (name,sequence_no,fg,bg,image) VALUES('".$value1['name']."',".$value1['reihe'].",'".$value1['fg']."','".$value1['bg']."','".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['new_'.$key1.'_image']['tmp_name']))."')";
-        $mysqli->query($query);
-        $log->InsertItem("new_help_cath.php -- ".$query);
-        $log->WriteLog;
+      if(isset($_FILES['new_'.$key1.'_image'])){
+              if(is_uploaded_file($_FILES['new_'.$key1.'_image']['tmp_name']) && getimagesize($_FILES['new_'.$key1.'_image']['tmp_name']) != false){
+                  $size = getimagesize($_FILES['new_'.$key1.'_image']['tmp_name']);
+                  $type = $size['mime'];
+                  $imgfp = fopen($_FILES['new_'.$key1.'_image']['tmp_name'], 'rb');
+                  $size = $size[3];
+                  $name = $_FILES['new_'.$key1.'_image']['name'];
+              }
+          }
+      $query = "INSERT INTO help_sections (name,sequence_no,fg,bg,image) VALUES('".$value1['name']."',".$value1['reihe'].",'".$value1['fg']."','".$value1['bg']."','".mysqli_real_escape_string($mysqli,file_get_contents($_FILES['new_'.$key1.'_image']['tmp_name']))."')";
+      $mysqli->query($query);
+      $log->InsertItem("new_help_cath.php -- ".$query);
+      $log->WriteLog;
     }
+  }
 }
 ?>
 <form enctype="multipart/form-data" name="new_help_cath" method="POST" action="index.php?action=NewHelpCath">

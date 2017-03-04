@@ -27,6 +27,7 @@ foreach ($_POST as $key => $value){
 }
 foreach ($ergarray as $key1 => $value1){
 //     echo $key1." : ".$value1."<br/>\n";
+  if((isset($value1['name'])) && ($value1['name'] !="")){
     if (is_numeric($key1)){
         if(isset($_FILES['new_'.$key1.'_image'])){
                 if(is_uploaded_file($_FILES['new_'.$key1.'_image']['tmp_name']) && getimagesize($_FILES['new_'.$key1.'_image']['tmp_name']) != false){
@@ -46,6 +47,7 @@ foreach ($ergarray as $key1 => $value1){
         $log->InsertItem("new_faq_cath.php -- ".$query);
         $log->WriteLog;
     }
+  }
 }
 ?>
 <form enctype="multipart/form-data" name="new_faq_cath" method="POST" action="index.php?action=NewFaqCath">
