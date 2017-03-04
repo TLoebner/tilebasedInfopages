@@ -126,7 +126,7 @@ if ($dataTblHelpContents[$_GET['pk']]['http_result'] == "DEAD LINK"){
     echo "<tr><td colspan=\"3\"><h2>Der angegebene Link funktioniert nicht. Bitte diesen korrigieren</h2></td></tr>";
 }
 ?>
-<tr><td><h2>Nutzer Feedback:<h2></td></tr>
+<tr><td colspan="2"><h2>Nutzer Feedback:<h2></td></tr>
 <?PHP
 $query = "SELECT * FROM all_incidents WHERE help_content_pk=".$_GET['pk']." AND status='new';";
 $res_incidents = $mysqli->query($query);

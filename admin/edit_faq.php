@@ -100,7 +100,7 @@ foreach ($ergarray as $key1 => $value1){
             }
         }
         echo "</select></td><td><input type=\"hidden\" value=\"9999\" name=\"in_".(string)$_GET['pk']."_sequence".(string)$m."\" value=\"".(string)$sequence[$m]."\"></td><tr>\n";
-        
+
     echo "<tr><td colspan=\"2\" >&nbsp;&nbsp;&nbsp;<a href=\"delete_faq.php?pk=".$_GET['pk']."\">Kompletten Eintrag löschen</a></td></tr>";
     echo "\t</tr><tr style=\"border:1px solid black;\">\n";
     echo "\t</tr><tr style=\"border:1px solid black;\">\n";
@@ -116,6 +116,14 @@ foreach ($ergarray as $key1 => $value1){
     echo "<input type=\"submit\" value=\"editieren\">";
     echo "</td>";
     echo "</tr>";
+?>
+<tr><td colspan="2"><h2>Nutzer Feedback:<h2></td></tr>
+<?PHP
+$query = "SELECT * FROM all_incidents WHERE faq_content_pk=".$_GET['pk']." AND status='new';";
+$res_incidents = $mysqli->query($query);
+while ($incident = $res_incidents->fetch_array(MYSQLI_ASSOC)){
+    echo "<tr><td colspan=\"3\">".$incident['description']."</td></tr>";
+}
 ?>
 </table>
 </form>
