@@ -1,4 +1,4 @@
--- 
+--
 --  Copyright [2016] [Torsten Loebner <loebnert@gmail.com>]
 --
 --  Licensed under the Apache License, Version 2.0 (the "License");
@@ -310,7 +310,7 @@ CREATE TABLE `TileInfoPage`.`commonIncodents` (
   PRIMARY KEY (`pk`));
 
 CREATE OR REPLACE VIEW `all_help_contents` AS
-    SELECT 
+    SELECT
         `help_multicontents`.`uid` AS `content_uid`,
         `help_sections`.`pk` AS `section_pk`,
         `help_subsections`.`pk` AS `subsection_pk`,
@@ -335,7 +335,7 @@ CREATE OR REPLACE VIEW `all_help_contents` AS
     ORDER BY `help_sections`.`sequence_no` , `help_subsections`.`sequence_no` , `help_multicontents`.`sequence_no`;
 
 CREATE OR REPLACE VIEW `all_faq_contents` AS
-    SELECT 
+    SELECT
         `faq_multicontents`.`uid` AS `content_uid`,
         `faq_sections`.`pk` AS `section_pk`,
         `faq_contents`.`pk` AS `content_pk`,
@@ -351,9 +351,9 @@ CREATE OR REPLACE VIEW `all_faq_contents` AS
         JOIN `faq_sections`) ON (((`faq_multicontents`.`faq_content_fk` = `faq_contents`.`pk`)
             AND (`faq_multicontents`.`faq_section_fk` = `faq_sections`.`pk`))))
     ORDER BY `faq_sections`.`sequence_no` , `faq_multicontents`.`sequence_no`;
-            
+
 CREATE OR REPLACE VIEW `all_incidents` AS
-    SELECT 
+    SELECT
         `incidents`.`pk` AS `incident_pk`,
         `incidents`.`description` AS `description`,
         `faq_incidents`.`status` AS `status`,
@@ -366,8 +366,8 @@ CREATE OR REPLACE VIEW `all_incidents` AS
         ((`incidents`
         JOIN `faq_incidents`)
         JOIN `faq_contents` ON (((`faq_incidents`.`faq_content_fk` = `faq_contents`.`pk`)
-            AND (`faq_incidents`.`incident_fk` = `incidents`.`pk`)))) 
-    UNION ALL SELECT 
+            AND (`faq_incidents`.`incident_fk` = `incidents`.`pk`))))
+    UNION ALL SELECT
         `incidents`.`pk` AS `incident_pk`,
         `incidents`.`description` AS `description`,
         `help_incidents`.`status` AS `status`,
@@ -381,10 +381,10 @@ CREATE OR REPLACE VIEW `all_incidents` AS
         JOIN `help_incidents`)
         JOIN `help_contents` ON (((`help_incidents`.`help_content_fk` = `help_contents`.`pk`)
             AND (`help_incidents`.`incident_fk` = `incidents`.`pk`))));
-            
-            
+
+
 CREATE OR REPLACE VIEW `all_search` AS
-    SELECT 
+    SELECT
         `searches`.`pk` AS `pk`,
         `searches`.`uid` AS `uid`,
         `searches`.`string` AS `string`,
@@ -399,7 +399,7 @@ CREATE OR REPLACE VIEW `all_search` AS
     ORDER BY `searches`.`uid`;
 
 CREATE OR REPLACE VIEW `all_contents` AS
-    SELECT 
+    SELECT
         'help' AS `type`,
         `all_help_contents`.`content_uid` AS `content_uid`,
         `all_help_contents`.`section_pk` AS `section_pk`,
@@ -416,8 +416,8 @@ CREATE OR REPLACE VIEW `all_contents` AS
         '' AS `question`,
         '' AS `answer`
     FROM
-        `all_help_contents` 
-    UNION ALL SELECT 
+        `all_help_contents`
+    UNION ALL SELECT
         'faq' AS `type`,
         `all_faq_contents`.`content_uid` AS `content_uid`,
         `all_faq_contents`.`section_pk` AS `section_pk`,
@@ -437,7 +437,7 @@ CREATE OR REPLACE VIEW `all_contents` AS
         `all_faq_contents`;
 
 CREATE OR REPLACE VIEW `all_search_contents` AS
-    SELECT 
+    SELECT
         `all_contents`.`content_uid` AS `content_uid`,
         `all_contents`.`type` AS `type`,
         `all_contents`.`section_pk` AS `section_pk`,
@@ -470,7 +470,7 @@ CREATE OR REPLACE VIEW `all_search_contents` AS
     ORDER BY `all_search`.`uid` , `all_contents`.`type`;
 
 CREATE OR REPLACE VIEW `help_search_contents` AS
-    SELECT 
+    SELECT
         `all_search`.`pk` AS `pk`,
         `all_search`.`uid` AS `uid`,
         `all_search`.`string` AS `string`,
@@ -500,7 +500,7 @@ CREATE OR REPLACE VIEW `help_search_contents` AS
     ORDER BY `all_search`.`uid`;
 
 CREATE OR REPLACE VIEW `faq_search_contents` AS
-    SELECT 
+    SELECT
         `all_search`.`pk` AS `pk`,
         `all_search`.`uid` AS `uid`,
         `all_search`.`string` AS `string`,
@@ -524,9 +524,9 @@ CREATE OR REPLACE VIEW `faq_search_contents` AS
             AND (`all_search`.`faq_content_pk` = `all_faq_contents`.`content_pk`))))
     ORDER BY `all_search`.`uid`;
 
-    
+
 CREATE OR REPLACE VIEW `all_status` AS
-    SELECT 
+    SELECT
         'faq' AS `type`,
         `status_faq`.`pk` AS `pk`,
         `status_faq`.`month` AS `month`,
@@ -537,8 +537,8 @@ CREATE OR REPLACE VIEW `all_status` AS
         `status_faq`.`search_result_fk` AS `search_pk`,
         `status_faq`.`count` AS `count`
     FROM
-        `status_faq` 
-    UNION ALL SELECT 
+        `status_faq`
+    UNION ALL SELECT
         'help' AS `type`,
         `status_help`.`pk` AS `pk`,
         `status_help`.`month` AS `month`,
@@ -550,8 +550,8 @@ CREATE OR REPLACE VIEW `all_status` AS
         `status_help`.`count` AS `count`
     FROM
         (`status_help`
-        LEFT JOIN `help_subsections` ON ((`status_help`.`help_subsection_fk` = `help_subsections`.`pk`))) 
-    UNION ALL SELECT 
+        LEFT JOIN `help_subsections` ON ((`status_help`.`help_subsection_fk` = `help_subsections`.`pk`)))
+    UNION ALL SELECT
         'search' AS `type`,
         `status_search`.`pk` AS `pk`,
         `status_search`.`month` AS `month`,
@@ -565,7 +565,7 @@ CREATE OR REPLACE VIEW `all_status` AS
         `status_search`;
 
 CREATE OR REPLACE VIEW `all_help_status` AS
-    SELECT 
+    SELECT
         `status_help`.`pk` AS `pk`,
         `status_help`.`month` AS `month`,
         `status_help`.`year` AS `year`,
@@ -591,10 +591,10 @@ CREATE OR REPLACE VIEW `all_help_status` AS
         (`status_help`
         LEFT JOIN `all_help_contents` ON (((`status_help`.`help_subsection_fk` = `all_help_contents`.`subsection_pk`)
             AND (`status_help`.`help_content_fk` = `all_help_contents`.`content_pk`))))
-    ORDER BY `status_help`.`year` , `status_help`.`month`;        
+    ORDER BY `status_help`.`year` , `status_help`.`month`;
 
 CREATE OR REPLACE VIEW `all_faq_status` AS
-    SELECT 
+    SELECT
         `status_faq`.`pk` AS `pk`,
         `status_faq`.`month` AS `month`,
         `status_faq`.`year` AS `year`,
@@ -616,9 +616,9 @@ CREATE OR REPLACE VIEW `all_faq_status` AS
         LEFT JOIN `all_faq_contents` ON (((`status_faq`.`faq_section_fk` = `all_faq_contents`.`section_pk`)
             AND (`status_faq`.`faq_content_fk` = `all_faq_contents`.`content_pk`))))
     ORDER BY `status_faq`.`year` , `status_faq`.`month`;
-    
+
 CREATE OR REPLACE VIEW `full_status_contents` AS
-    SELECT 
+    SELECT
         `all_status`.`type` AS `status_type`,
         `all_status`.`pk` AS `status_pk`,
         `all_status`.`month` AS `month`,
@@ -663,7 +663,7 @@ CREATE OR REPLACE VIEW `full_status_contents` AS
             AND (`all_status`.`content_pk` = `all_search_contents`.`content_pk`)))));
 
 CREATE OR REPLACE VIEW `all_sections` AS
-    SELECT 
+    SELECT
         'help' AS `type`,
         `help_sections`.`pk` AS `pk`,
         `help_sections`.`name` AS `name`,
@@ -671,8 +671,8 @@ CREATE OR REPLACE VIEW `all_sections` AS
         `help_sections`.`fg` AS `fg`,
         `help_sections`.`image` AS `image`
     FROM
-        `help_sections` 
-    UNION ALL SELECT 
+        `help_sections`
+    UNION ALL SELECT
         'faq' AS `type`,
         `faq_sections`.`pk` AS `pk`,
         `faq_sections`.`name` AS `name`,
@@ -681,9 +681,9 @@ CREATE OR REPLACE VIEW `all_sections` AS
         `faq_sections`.`image` AS `image`
     FROM
         `faq_sections`;
-        
+
 CREATE OR REPLACE VIEW `search_sections` AS
-    SELECT 
+    SELECT
         `all_search_contents`.`uid` AS `uid`,
         `all_search_contents`.`string` AS `string`,
         `all_search_contents`.`type` AS `type`,
@@ -698,9 +698,9 @@ CREATE OR REPLACE VIEW `search_sections` AS
         LEFT JOIN `all_sections` ON (((`all_sections`.`pk` = `all_search_contents`.`section_pk`)
             AND (`all_sections`.`type` = `all_search_contents`.`type`))))
     GROUP BY `all_search_contents`.`uid` , `all_search_contents`.`section_pk`;
-    
+
 CREATE OR REPLACE VIEW `all_search_status` AS
-    SELECT 
+    SELECT
         `all_search_contents`.`uid` AS `uid`,
         `all_search_contents`.`string` AS `string`,
         `all_search_contents`.`type` AS `type`,
@@ -714,7 +714,7 @@ CREATE OR REPLACE VIEW `all_search_status` AS
     GROUP BY `all_search_contents`.`uid` , `all_search_contents`.`type` , `status_search`.`year` , `status_search`.`month`;
 
 CREATE OR REPLACE VIEW `search_subsections` AS
-    SELECT 
+    SELECT
         `all_search_contents`.`uid` AS `uid`,
         `all_search_contents`.`string` AS `string`,
         `all_search_contents`.`type` AS `type`,
@@ -728,9 +728,9 @@ CREATE OR REPLACE VIEW `search_subsections` AS
         (`all_search_contents`
         LEFT JOIN `help_subsections` ON ((`help_subsections`.`pk` = `all_search_contents`.`subsection_pk`)))
     GROUP BY `all_search_contents`.`uid` , `all_search_contents`.`subsection_pk`;
-            
+
 CREATE OR REPLACE VIEW `HTTP_ERRORS` AS
-    SELECT 
+    SELECT
         `help_contents`.`pk` AS `pk`,
         `help_contents`.`name` AS `name`,
         `help_contents`.`link` AS `link`,
@@ -883,6 +883,19 @@ INSERT INTO `admin_menu` (`pk`, `action`, `module`, `description`) VALUES(26, 'S
 INSERT INTO `admin_menu` (`pk`, `action`, `module`, `description`) VALUES(27, 'DeleteFeedback', 'delete_common_feedback.php', NULL);
 
 
-    COMMIT
+COMMIT
+-- UPDATE after V 1.0 before 1.5
+START TRANSACTION;
+SET time_zone = "+00:00";
+INSERT INTO `TileInfoPage`.`configs` (`pk`, `name`, `type`, `text`, `type_int`, `type_color`, `type_string`, `type_text`, `type_image_mime`, `type_image_size`, `type_image_data`) VALUES (NULL, 'PageTitle', 'text', 'Seitentitel', NULL, NULL, NULL, 'Kirchen-Pavillon Infoseiten', NULL, NULL, NULL);
+INSERT INTO `TileInfoPage`.`configs` (`pk`, `name`, `type`, `text`, `type_int`, `type_color`, `type_string`, `type_text`, `type_image_mime`, `type_image_size`, `type_image_data`) VALUES (NULL, 'InfoWidth', 'text', 'Symbolbreite des Infosymbols', NULL, NULL, '', '10px', NULL, NULL, NULL);
+INSERT INTO `TileInfoPage`.`configs` (`pk`, `name`, `type`, `text`, `type_int`, `type_color`, `type_string`, `type_text`, `type_image_mime`, `type_image_size`, `type_image_data`) VALUES (NULL, 'InfoHeight', 'text', 'Symbolhöhe des Infosymbols', NULL, NULL, '', '10px', NULL, NULL, NULL);
+INSERT INTO `TileInfoPage`.`configs` (`pk`, `name`, `type`, `text`, `type_int`, `type_color`, `type_string`, `type_text`, `type_image_mime`, `type_image_size`, `type_image_data`) VALUES (NULL, 'FeedbackWidth', 'text', 'Symbolbreite des Feedbacksymbols', NULL, NULL, NULL, '10px', NULL, NULL, NULL);
+INSERT INTO `TileInfoPage`.`configs` (`pk`, `name`, `type`, `text`, `type_int`, `type_color`, `type_string`, `type_text`, `type_image_mime`, `type_image_size`, `type_image_data`) VALUES (NULL, 'FeedbackHeight', 'text', 'Symbolhöhe des Feedbacksymbols', NULL, NULL, NULL, '10px', NULL, NULL, NULL);
+INSERT INTO `TileInfoPage`.`admin_menu` (`pk`, `action`, `module`, `description`) VALUES (NULL, 'EditImpress', 'edit_impress.php', 'Impressum editieren');
+INSERT INTO `TileInfoPage`.`admin_menu` (`pk`, `action`, `module`, `description`) VALUES (NULL, 'EditHeadMenu', 'edit_headMenu.php', 'Oberes Seiten Menü editieren');
+INSERT INTO `TileInfoPage`.`admin_menu` (`pk`, `action`, `module`, `description`) VALUES (NULL, 'EditScreensaver', 'edit_screensaver.php', 'Bildschirmschoner editieren');
+INSERT INTO `TileInfoPage`.`admin_menu` (`pk`, `action`, `module`, `description`) VALUES (NULL, 'StatusSearch', 'status_search.php', 'Statistiken über die Suche');
 
 
+COMMIT
