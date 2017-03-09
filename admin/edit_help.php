@@ -131,7 +131,7 @@ if ($dataTblHelpContents[$_GET['pk']]['http_result'] == "DEAD LINK"){
 $query = "SELECT * FROM all_incidents WHERE help_content_pk=".$_GET['pk']." AND status='new';";
 $res_incidents = $mysqli->query($query);
 while ($incident = $res_incidents->fetch_array(MYSQLI_ASSOC)){
-    echo "<tr><td colspan=\"3\">".$incident['description']."</td></tr>";
+    echo "<tr><td colspan=\"3\"><table><tr><td>".$incident['description']."</td><td><a class=\"alert button\" href=\"index.php?action=DeleteHelpFeedback&id1=".$incident['incident_pk']."&id2=".$incident['help_content_pk']."\">Löschen</a></td></tr></table></td></tr>";
 }
 ?>
 <!-- </table> -->

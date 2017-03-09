@@ -122,7 +122,7 @@ foreach ($ergarray as $key1 => $value1){
 $query = "SELECT * FROM all_incidents WHERE faq_content_pk=".$_GET['pk']." AND status='new';";
 $res_incidents = $mysqli->query($query);
 while ($incident = $res_incidents->fetch_array(MYSQLI_ASSOC)){
-    echo "<tr><td colspan=\"3\">".$incident['description']."</td></tr>";
+    echo "<tr><td colspan=\"3\"><table><tr><td>".$incident['description']."</td><td><a class=\"alert button\" href=\"index.php?action=DeleteFaqFeedback&id1=".$incident['incident_pk']."&id2=".$incident['faq_content_pk']."\">Löschen</a></td></tr></table></td></tr>";
 }
 ?>
 </table>

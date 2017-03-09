@@ -20,9 +20,12 @@
  */
 
  $pk=$_GET['id'];
- 
-    $query = "UPDATE commonIncidents set status='done' WHERE pk=".$pk.";";
-    $res_incidents = $mysqli->query($query);
 
+    $timestamp = time();
+    $datestring = date("d.m.Y - H:i", $timestamp);
+    $query = "UPDATE commonIncidents set status='done', coments='closed on ".$datestring."' WHERE pk=".$pk.";";
+    $res_incidents = $mysqli->query($query);
+    $log->InsertItem("delete_common_feedback.php -- ".$query);
+    $log->WriteLog;
     echo "Eintrag gelöscht";
 ?>
