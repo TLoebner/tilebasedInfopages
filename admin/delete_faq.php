@@ -29,6 +29,13 @@ foreach ($ergarray as $key1 => $value1){
             $query = "DELETE FROM faq_multicontents WHERE faq_content_fk=".$value1['pk'].";";
             $mysqli->query($query);
             $rows1 = $mysqli->affected_rows;
+            $log->InsertItem("delete_faq.php -- ".$query);
+            $log->WriteLog;
+            $query = "DELETE FROM faq_incidents WHERE faq_content_fk=".$value1['pk'].";";
+            $mysqli->query($query);
+            $rows3 = $mysqli->affected_rows;
+            $log->InsertItem("delete_faq.php -- ".$query);
+            $log->WriteLog;
             $query = "DELETE FROM faq_contents WHERE pk=".$value1['pk'].";";
             $mysqli->query($query);
             $rows2 = $mysqli->affected_rows;

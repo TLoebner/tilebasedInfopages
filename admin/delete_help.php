@@ -29,8 +29,14 @@ foreach ($ergarray as $key1 => $value1){
             $query = "DELETE FROM help_multicontents WHERE help_content_fk=".$value1['pk'].";";
             $mysqli->query($query);
             $rows1 = $mysqli->affected_rows;
+            $log->InsertItem("delete_help.php -- ".$query);
+            $log->WriteLog;
+            $query = "DELETE FROM help_incidents WHERE help_content_fk=".$value1['pk'].";";
+            $mysqli->query($query);
+            $rows3 = $mysqli->affected_rows;
+            $log->InsertItem("delete_faq.php -- ".$query);
+            $log->WriteLog;
             $query = "DELETE FROM help_contents WHERE pk=".$value1['pk'].";";
-                     //"DELETE FROM help_multicontents WHERE help_content_fk=14; DELETE FROM help_contents WHERE pk=14;"
             $mysqli->query($query);
             $rows2 = $mysqli->affected_rows;
             $log->InsertItem("delete_help.php -- ".$query);

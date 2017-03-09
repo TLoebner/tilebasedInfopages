@@ -71,12 +71,12 @@
                 foreach($Menu['help'] as $SecKey => $SecValue){
                     echo "<li><a href=\"index.php?action=EditHelpCath&pk=".$SecValue['section_pk']."\">".$SecKey."</a>\n";
                     echo "<ul class=\"menu vertical nested\">\n";
-                    echo "<li><a href=\"index.php?action=EditHelpCath&pk=".$SecValue['section_pk']."\">Hilfe-Kathegorie anpassen</a></li>";
+                    echo "<li><a href=\"index.php?action=EditHelpCath&pk=".$SecValue['section_pk']."\">Hilfe-Kategorie anpassen</a></li>";
                     foreach($SecValue as $SubSecKey => $SubSecValue){
                         if ($SubSecKey != 'section_pk'){
                             echo "<li><a href=\"index.php?action=EditHelpSubCath&pk=".$SubSecValue['subsection_pk']."\">".$SubSecKey."</a>\n";
                             echo "<ul class=\"menu vertical nested\">\n";
-                            echo "<li><a href=\"index.php?action=EditHelpSubCath&pk=".$SubSecValue['subsection_pk']."\">Hilfe-Unterkathegorie anpassen</a></li>";
+                            echo "<li><a href=\"index.php?action=EditHelpSubCath&pk=".$SubSecValue['subsection_pk']."\">Hilfe-UnterKategorie anpassen</a></li>";
                                 foreach($SubSecValue as $ContentKey => $ContentValue){
                                     if ($ContentKey != 'subsection_pk'){
                                         echo "<li><a href=\"index.php?action=EditHelp&pk=".$ContentValue['content_pk']."\">".$ContentKey."</a></li>\n";
@@ -96,7 +96,7 @@
                 foreach($Menu['faq'] as $SecKey => $SecValue){
                     echo "<li><a href=\"index.php?action=EditFaqCath&pk=".$SecValue['section_pk']."\">".$SecKey."</a>\n";
                     echo "<ul class=\"menu vertical nested\">";
-                    echo "<li><a href=\"index.php?action=EditFaqCath&pk=".$SecValue['section_pk']."\">FAQ-Kathegorie anpassen</a></li>";
+                    echo "<li><a href=\"index.php?action=EditFaqCath&pk=".$SecValue['section_pk']."\">FAQ-Kategorie anpassen</a></li>";
                     foreach($SecValue as $ContentKey => $ContentValue){
                         if ($ContentKey != 'section_pk'){
                             echo "<li><a href=\"index.php?action=EditFaq&pk=".$ContentValue['content_pk']."\">".$ContentKey."</a></li>\n";
